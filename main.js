@@ -20,20 +20,33 @@ function refreshLibrary() {
         const bookElement = document.createElement('div');
         bookElement.classList.add('book');
 
+        bookElement.setAttribute('data', library.indexOf(book))
+
         const bookTitle = document.createElement('div');
         const bookAuthor = document.createElement('div');
         const bookPages = document.createElement('div');
         const bookRead = document.createElement('div');
+        const deleteBook = document.createElement('button');
 
         bookTitle.textContent = book.title;
         bookAuthor.textContent = book.author;
         bookPages.textContent = book.pages;
         bookRead.textContent = book.read;
 
+        deleteBook.textContent = 'Delete';
+        deleteBook.classList.add('delete-book');
+
+        deleteBook.addEventListener('click', (event) => {
+            library.splice(Number(event.target.getAttribute('data'), 1));
+
+            event.target.parentElement.remove();
+        })
+
         bookElement.appendChild(bookTitle);
         bookElement.appendChild(bookAuthor);
         bookElement.appendChild(bookPages);
         bookElement.appendChild(bookRead);
+        bookElement.appendChild(deleteBook);
 
         bookContainer.appendChild(bookElement);
     }
