@@ -27,6 +27,9 @@ function refreshLibrary() {
         const bookPages = document.createElement('div');
         const bookRead = document.createElement('div');
         const deleteBook = document.createElement('button');
+        const toggleRead = document.createElement('button');
+
+        bookRead.classList.add('read')
 
         bookTitle.textContent = book.title;
         bookAuthor.textContent = book.author;
@@ -34,12 +37,27 @@ function refreshLibrary() {
         bookRead.textContent = book.read;
 
         deleteBook.textContent = 'Delete';
-        deleteBook.classList.add('delete-book');
+        toggleRead.textContent = 'Toggle read status'
 
         deleteBook.addEventListener('click', (event) => {
-            library.splice(Number(event.target.getAttribute('data'), 1));
+            library.splice(Number(event.target.parentElement.getAttribute('data'), 1));
 
             event.target.parentElement.remove();
+        })
+
+        toggleRead.addEventListener('click', (event) => {
+            const index = Number(event.target.parentElement.getAttribute('data'))
+            const readStatus = document.querySelector(`[data="${index}"] .read`)
+
+            if (readStatus.textContent === "Read") {
+                book.read = false
+
+                readStatus.textContent = 'Not read'
+            } else {
+                book.read = true
+
+                readStatus.textContent = 'Read'
+            }
         })
 
         bookElement.appendChild(bookTitle);
@@ -47,6 +65,7 @@ function refreshLibrary() {
         bookElement.appendChild(bookPages);
         bookElement.appendChild(bookRead);
         bookElement.appendChild(deleteBook);
+        bookElement.appendChild(toggleRead)
 
         bookContainer.appendChild(bookElement);
     }
