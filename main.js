@@ -29,11 +29,16 @@ function refreshLibrary() {
         const deleteBook = document.createElement('button');
         const toggleRead = document.createElement('button');
 
+        bookTitle.classList.add('title')
+        bookAuthor.classList.add('author')
+        bookPages.classList.add('pages')
         bookRead.classList.add('read')
+        deleteBook.classList.add('delete')
+        toggleRead.classList.add('toggle-read')
 
         bookTitle.textContent = book.title;
         bookAuthor.textContent = book.author;
-        bookPages.textContent = book.pages;
+        bookPages.textContent = `Pages: ${book.pages}`;
         bookRead.textContent = book.read;
 
         deleteBook.textContent = 'Delete';
